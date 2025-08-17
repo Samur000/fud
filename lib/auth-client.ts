@@ -105,4 +105,19 @@ export const authClient = {
 			throw new Error(response.error.message);
 		}
 	},
+
+	async requestOtp(data: { phone: string; purpose: string; channel: string }): Promise<{ request_id: string; mask: string }> {
+		const response = await api.post<{ request_id: string; mask: string }>('/auth/phone/request-otp', data);
+		if (response.error) {
+			throw new Error(response.error.message);
+		}
+		return response.data!;
+	},
+
+	async verifyOtp(data: { request_id: string; code: string; remember_me?: boolean; accept_terms: boolean }): Promise<void> {
+		const response = await api.post('/auth/phone/verify-otp', data);
+		if (response.error) {
+			throw new Error(response.error.message);
+		}
+	},
 };

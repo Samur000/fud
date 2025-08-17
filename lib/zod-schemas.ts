@@ -83,4 +83,18 @@ export const emailLoginSchema = z.object({
   password: passwordSchema,
 });
 
+export const otpSchema = z.object({
+  code: z.string().length(6, 'Код должен содержать 6 цифр'),
+  remember_me: z.boolean().optional(),
+  accept_terms: z.literal(true, {
+    errorMap: () => ({ message: 'Необходимо принять условия использования' }),
+  }),
+});
+
+export const phoneFormSchema = z.object({
+  phone: phoneSchema,
+});
+
 export type EmailLoginFormData = z.infer<typeof emailLoginSchema>;
+export type OtpFormData = z.infer<typeof otpSchema>;
+export type PhoneFormData = z.infer<typeof phoneFormSchema>;

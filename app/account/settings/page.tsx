@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Settings, ArrowLeft, User, Bell, Shield, CreditCard, Globe, Palette, LogOut, Save } from 'lucide-react';
+import { Settings, ArrowLeft, User, Bell, Shield, CreditCard, Globe, Palette, LogOut, Save, Trash2 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';

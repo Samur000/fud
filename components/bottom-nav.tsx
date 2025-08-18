@@ -1,20 +1,21 @@
 'use client';
 
-import { Home, Search, ShoppingCart, User } from 'lucide-react';
+import { Home, Search, ShoppingCart, User, MapPin } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAppStore } from '@/lib/store';
 
-const navItems = [
-  { href: '/', icon: Home, label: 'Домой' },
-  { href: '/search', icon: Search, label: 'Поиск' },
-  { href: '/cart', icon: ShoppingCart, label: 'Корзина' },
-  { href: '/account', icon: User, label: 'Профиль' },
-];
-
 export function BottomNav() {
   const pathname = usePathname();
-  const { cart, isAuthenticated } = useAppStore();
+  const { cart, isAuthenticated, user } = useAppStore();
+
+  const navItems = [
+    { href: '/', icon: Home, label: 'Домой' },
+    { href: '/search', icon: Search, label: 'Поиск' },
+    ...(user?.role === 'buyer' ? [{ href: '/map', icon: MapPin, label: 'Карта' } as const] : []),
+    { href: '/cart', icon: ShoppingCart, label: 'Корзина' },
+    { href: '/account', icon: User, label: 'Профиль' },
+  ];
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-border">
@@ -24,10 +25,10 @@ export function BottomNav() {
           const isActive = pathname === item.href;
           const isCart = item.href === '/cart';
           const isAccount = item.href === '/account';
-          
-          // For cart and account, check if user is authenticated
+          const isMap = item.href === '/map';
+
           const href = isAccount && !isAuthenticated ? '/auth' : item.href;
-          
+
           return (
             <Link key={item.href} href={href} className={`flex flex-col items-center justify-center w-full h-full space-y-1 transition-colors ${
               isActive ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
@@ -47,4 +48,4 @@ export function BottomNav() {
       </div>
     </nav>
   );
-} 
+}

@@ -8,6 +8,8 @@ import { Badge } from '@/components/ui/badge';
 import { useAppStore } from '@/lib/store';
 import Link from 'next/link';
 
+
+
 const orderStatuses = {
   pending: { label: 'Ожидает подтверждения', icon: Clock, color: 'text-yellow-600', bg: 'bg-yellow-50' },
   confirmed: { label: 'Подтвержден', icon: CheckCircle, color: 'text-blue-600', bg: 'bg-blue-50' },

@@ -15,6 +15,8 @@ export function AppHeader() {
         return 'Каталог';
       case '/search':
         return 'Поиск';
+      case '/map':
+        return 'Карта рынка';
       case '/cart':
         return 'Корзина';
       case '/account':
@@ -24,6 +26,7 @@ export function AppHeader() {
       case '/seller':
         return 'Панель продавца';
       default:
+        if (pathname?.startsWith('/vendor/')) return 'Магазин продавца';
         return 'FoodCity';
     }
   };
